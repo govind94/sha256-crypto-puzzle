@@ -22,7 +22,7 @@ app.use((req, res, next) => {
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
       }
-      console.log(i, P, shaMBinaryLastB);
+      console.log(i, P);
       sum += count/5;
     }
     arr.push(sum);
