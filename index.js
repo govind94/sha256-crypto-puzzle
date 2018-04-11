@@ -12,7 +12,7 @@ app.use((req, res, next) => {
   for(B = 1; B < 3; B *= 2) {
     let NUMBER_OF_BITS_FOR_P = 8 * B;
     let sum = 0;
-    for(let i = 0; i < 1; i++) {
+    for(let i = 0; i < 5; i++) {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       for(count = 0; ; count++) {
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         console.log(i, P, shaMBinaryLastB);
         if(P === shaMBinaryLastB) break;
       }
-      sum += count;
+      sum += count/5;
     }
     arr.push(sum);
   }
