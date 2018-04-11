@@ -9,10 +9,10 @@ var NUMBER_OF_BITS_FOR_M = 1000;
 
 app.use((req, res, next) => {
   let B, arr = [];
-  for(B = 1; B < 5; B *= 2) {
+  for(B = 1; B < 4; B++) {
     let NUMBER_OF_BITS_FOR_P = 8 * B;
     let sum = 0;
-    for(let i = 0; i < 1; i++) {
+    for(let i = 0; i < 10; i++) {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       console.time('timeTaken');
@@ -22,14 +22,14 @@ app.use((req, res, next) => {
         let shaMBinary = hexToBinary(shaMHex);
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
-        if(count % 1000000 === 0) {
+        if(count % 10000000 === 0) {
           NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 256 + 1);
           console.log(NUMBER_OF_BITS_FOR_M);
         }
       }
       console.log(i, NUMBER_OF_BITS_FOR_M, P);
       console.timeEnd('timeTaken');
-      sum += count;
+      sum += count/10;
     }
     arr.push(sum);
   }
