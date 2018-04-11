@@ -5,7 +5,7 @@ const hexToBinary = require('hex-to-binary');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
-const NUMBER_OF_BITS_FOR_M = 1000;
+var NUMBER_OF_BITS_FOR_M = 1000;
 
 app.use((req, res, next) => {
   let B, arr = [];
@@ -15,14 +15,20 @@ app.use((req, res, next) => {
     for(let i = 0; i < 1; i++) {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
+      console.time('timeTaken');
       for(count = 0; ; count++) {
         let M = randomBinary(NUMBER_OF_BITS_FOR_M);
         let shaMHex = shajs('sha256').update(M).digest('hex');
         let shaMBinary = hexToBinary(shaMHex);
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
+        if(count % 1000000 === 0) {
+          NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 1000 + 1);
+          console.log(NUMBER_OF_BITS_FOR_M);
+        }
       }
-      console.log(i, P);
+      console.log(i, NUMBER_OF_BITS_FOR_M, P);
+      console.timeEnd('timeTaken');
       sum += count;
     }
     arr.push(sum);
