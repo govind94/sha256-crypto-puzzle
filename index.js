@@ -27,7 +27,7 @@ app.use((req, res, next) => {
     }
     arr.push(sum);
   }
-  console.log("Fiiiinnnnaaaallllllyyyyy!");
+  console.log("Fiiiinnnnaaaallllllyyyyy!", arr);
   res.locals.arr = arr;
   next();
 });
