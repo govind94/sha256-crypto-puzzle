@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
         if(count % 1000000 === 0) {
-          NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 1000 + 1);
+          NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 256 + 1);
           console.log(NUMBER_OF_BITS_FOR_M);
         }
       }
