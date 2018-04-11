@@ -9,10 +9,10 @@ const NUMBER_OF_BITS_FOR_M = 1000;
 
 app.use((req, res, next) => {
   let B, arr = [];
-  for(B = 1; B < 3; B *= 2) {
+  for(B = 1; B < 5; B *= 2) {
     let NUMBER_OF_BITS_FOR_P = 8 * B;
     let sum = 0;
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 1; i++) {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       for(count = 0; ; count++) {
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         if(P === shaMBinaryLastB) break;
       }
       console.log(i, P);
-      sum += count/5;
+      sum += count;
     }
     arr.push(sum);
   }
