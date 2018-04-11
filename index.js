@@ -3,6 +3,7 @@ const shajs = require('sha.js');
 const randomBinary = require('random-binary');
 const hexToBinary = require('hex-to-binary');
 
+const PORT = process.env.PORT || 8080;
 const app = express();
 const NUMBER_OF_BITS_FOR_M = 1000;
 
@@ -38,6 +39,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen('8080', () => {
+app.listen(PORT, () => {
   console.log("Server running...");
 });
