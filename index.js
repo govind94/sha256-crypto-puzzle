@@ -17,15 +17,14 @@ app.use((req, res, next) => {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       console.time('timeTaken'); // record time
-      let M = randomBinary(NUMBER_OF_BITS_FOR_M);
       for(count = 0; ; count++) { // keep count of each trial
+        let M = randomBinary(NUMBER_OF_BITS_FOR_M);
         let shaMHex = shajs('sha256').update(M).digest('hex');
         let shaMBinary = hexToBinary(shaMHex);
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
         if(count % 10000000 === 0) { // change #bits of M after every 10000000 attempt
           NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 256 + 1);
-          M = randomBinary(NUMBER_OF_BITS_FOR_M);
           console.log(NUMBER_OF_BITS_FOR_M);
         }
       }
