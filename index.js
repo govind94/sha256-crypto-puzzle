@@ -10,9 +10,10 @@ var NUMBER_OF_BITS_FOR_M = 1000;
 app.use((req, res, next) => {
   let B, arr = [];
   for(B = 1; B < 4; B++) {
+    console.log(`\n#bytes = ${B}`);
     let NUMBER_OF_BITS_FOR_P = 8 * B;
     let sum = 0;
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < 5; i++) {
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       console.time('timeTaken');
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
       }
       console.log(i, NUMBER_OF_BITS_FOR_M, P);
       console.timeEnd('timeTaken');
-      sum += count/10;
+      sum += count/5;
     }
     arr.push(sum);
   }
