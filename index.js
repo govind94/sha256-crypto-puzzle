@@ -9,7 +9,7 @@ var NUMBER_OF_BITS_FOR_M = 1000;
 
 app.use((req, res, next) => {
   let B, arr = []; // 'arr' stores avg count for each 'B'
-  for(B = 1; B < 2; B++) {
+  for(B = 1; B < 3; B++) {
     console.log(`\n#byte(s) = ${B}`);
     let NUMBER_OF_BITS_FOR_P = 8 * B; // get #bits
     let sum = 0;
