@@ -10,13 +10,14 @@ var NUMBER_OF_BITS_FOR_M = 1000;
 app.use((req, res, next) => {
   let B, arr = []; // 'arr' stores avg count for each 'B'
   for(B = 1; B < 2; B++) {
-    console.log(`\n#bytes = ${B}`);
+    console.log(`\n#byte(s) = ${B}`);
     let NUMBER_OF_BITS_FOR_P = 8 * B; // get #bits
     let sum = 0;
-    for(let i = 0; i < 5; i++) { // #trials
+    console.time('timeTaken');  // record time
+    for(let i = 0; i < 1000; i++) { // #trials
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
-      console.time('timeTaken'); // record time
+      console.time('timeTakenPerCount'); // record time per count
       for(count = 0; ; count++) { // keep count of each trial
         let M = randomBinary(NUMBER_OF_BITS_FOR_M);
         let shaMHex = shajs('sha256').update(M).digest('hex');
@@ -28,13 +29,14 @@ app.use((req, res, next) => {
           console.log(NUMBER_OF_BITS_FOR_M);
         }
       }
-      console.log(i, NUMBER_OF_BITS_FOR_M, P);
-      console.timeEnd('timeTaken'); // save time
-      sum += count/5;
+      console.log(i, NUMBER_OF_BITS_FOR_M, P, count);
+      console.timeEnd('timeTakenPerCount'); // save time per count
+      sum += count/1000;
     }
     arr.push(sum);
   }
   console.log("Fiiiinnnnaaaallllllyyyyy!", arr);
+  console.timeEnd('timeTaken'); // save time
   res.locals.arr = arr;
   next();
 });
