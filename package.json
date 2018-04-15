@@ -1,7 +1,7 @@
 {
   "name": "compproject",
   "version": "1.0.0",
-  "description": "",
+  "description": "Random Crypto Puzzle Generator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   "engines": {
     "node": "8.2.1"
   },
-  "author": "",
+  "author": "GV",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
