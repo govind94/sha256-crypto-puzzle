@@ -5,16 +5,17 @@ const hexToBinary = require('hex-to-binary');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
-var NUMBER_OF_BITS_FOR_M = 1000;
+var NUMBER_OF_BITS_FOR_M;
 
 app.use((req, res, next) => {
   let B, arr = []; // 'arr' stores avg count for each 'B'
-  for(B = 1; B < 3; B++) {
+  for(B = 3; B < 4; B++) {
     console.log(`\n#byte(s) = ${B}`);
     let NUMBER_OF_BITS_FOR_P = 8 * B; // get #bits
+    NUMBER_OF_BITS_FOR_M = 1000;
     let sum = 0;
     console.time('totalTimeTaken');  // record total time
-    for(let i = 1; i <= 1000; i++) { // #trials
+    for(let i = 1; i <= 50; i++) { // #trials
       let P = randomBinary(NUMBER_OF_BITS_FOR_P);
       let count;
       console.time('timeTakenPerTrial'); // record time per trial
@@ -24,14 +25,14 @@ app.use((req, res, next) => {
         let shaMBinary = hexToBinary(shaMHex);
         let shaMBinaryLastB = shaMBinary.substring(shaMBinary.length-NUMBER_OF_BITS_FOR_P);
         if(P === shaMBinaryLastB) break;
-        if(count % 10000000 === 0) { // change #bits of M after every 10000000 attempt
+        if(count % 100000000 === 0) { // change #bits of M after every 10000000 attempt
           NUMBER_OF_BITS_FOR_M = Math.floor(Math.random() * 256 + 1);
           console.log(NUMBER_OF_BITS_FOR_M);
         }
       }
       console.log(i, NUMBER_OF_BITS_FOR_M, P, count);
       console.timeEnd('timeTakenPerTrial'); // save time per trial
-      sum += count/1000;
+      sum += count/50;
     }
     arr.push(sum);
   }
